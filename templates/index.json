@@ -53,13 +53,22 @@
         "slide_1",
         "slide_2",
         "slide_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Clean<br>That<br><span class=\"lime\">Lasts</span>",
+        "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
+        "cta_primary_text": "Shop now",
+        "cta_primary_url": "",
+        "cta_secondary_text": "How it works",
+        "cta_secondary_url": ""
+      }
     },
     "shop": {
       "type": "purelane-shop",
       "settings": {
         "kicker": "Bestsellers",
         "heading": "Loved by 30,000 homes",
+        "collection": "",
         "products_to_show": 4
       }
     },
@@ -75,7 +84,7 @@
             "override_price": 499,
             "includes_summary": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen.",
             "cta_text": "Shop bundle",
-            "cta_url": "#bundles"
+            "cta_url": ""
           }
         },
         "combo_2": {
@@ -87,7 +96,7 @@
             "override_price": 499,
             "includes_summary": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner. Softer, fresher wash.",
             "cta_text": "Shop bundle",
-            "cta_url": "#bundles"
+            "cta_url": ""
           }
         },
         "combo_3": {
@@ -99,7 +108,7 @@
             "override_price": 799,
             "includes_summary": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
             "cta_text": "Shop bundle",
-            "cta_url": "#bundles"
+            "cta_url": ""
           }
         }
       },
@@ -107,7 +116,14 @@
         "combo_1",
         "combo_2",
         "combo_3"
-      ]
+      ],
+      "settings": {
+        "kicker": "Pre-built to save you money",
+        "heading": "Best selling combos",
+        "description": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.",
+        "swipe_cue_text": "Swipe for more combos",
+        "rail_note": "Select your preferred combo box to view included products and proceed to checkout."
+      }
     },
     "bundles": {
       "type": "purelane-bundles",
@@ -123,7 +139,7 @@
             "feature_list": "Pick any two products\nFree shipping across India",
             "is_featured": false,
             "cta_text": "Build this box",
-            "cta_url": "#shop"
+            "cta_url": ""
           }
         },
         "tier_2": {
@@ -137,7 +153,7 @@
             "feature_list": "Pick any three products\nCovers kitchen and laundry\nFree shipping across India",
             "is_featured": true,
             "cta_text": "Build this box",
-            "cta_url": "#shop"
+            "cta_url": ""
           }
         },
         "tier_3": {
@@ -151,7 +167,7 @@
             "feature_list": "Pick any five products\nEvery room in one order\nFree shipping across India",
             "is_featured": false,
             "cta_text": "Build this box",
-            "cta_url": "#shop"
+            "cta_url": ""
           }
         }
       },
@@ -159,7 +175,13 @@
         "tier_1",
         "tier_2",
         "tier_3"
-      ]
+      ],
+      "settings": {
+        "kicker": "Tiered savings",
+        "heading": "Build your custom box",
+        "description": "Choose the tier that fits your home. Pick any products from our shop shelf and save up to ₹696.",
+        "rail_note": "Select any bundle tier to pick your products and lock in flat per-product savings."
+      }
     },
     "reviews": {
       "type": "purelane-reviews",
@@ -221,7 +243,14 @@
         "review_3",
         "review_4",
         "review_5"
-      ]
+      ],
+      "settings": {
+        "kicker": "That's what they said",
+        "heading": "Real reviews from real homes",
+        "rating_score": "4.8",
+        "rating_count_text": "8,000+ reviews",
+        "home_count_text": "12 lakh+ homes"
+      }
     }
   },
   "order": [
