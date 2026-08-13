@@ -26,8 +26,18 @@
     {%- endif -%}
 
     <div class="hero-copy">
-      {%- if section.settings.heading != blank -%}
-        <h1 class="d1 rv in">{{ section.settings.heading }}</h1>
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank -%}
+        <h1 class="d1 rv in">
+          {%- if section.settings.heading_line_1 != blank -%}
+            <span>{{ section.settings.heading_line_1 | escape }}</span><br>
+          {%- endif -%}
+          {%- if section.settings.heading_line_2 != blank -%}
+            <span>{{ section.settings.heading_line_2 | escape }}</span><br>
+          {%- endif -%}
+          {%- if section.settings.heading_line_3 != blank -%}
+            <span class="lime">{{ section.settings.heading_line_3 | escape }}</span>
+          {%- endif -%}
+        </h1>
       {%- endif -%}
 
       <div class="rule rv rv-d1">
@@ -157,10 +167,22 @@
   "class": "purelane-hero-section",
   "settings": [
     {
-      "type": "inline_richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Clean<br>That<br><span class=\"lime\">Lasts</span>"
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "Clean"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2",
+      "default": "That"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading Line 3 (Highlighted)",
+      "default": "Lasts"
     },
     {
       "type": "textarea",

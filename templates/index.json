@@ -55,7 +55,9 @@
         "slide_3"
       ],
       "settings": {
-        "heading": "Clean<br>That<br><span class=\"lime\">Lasts</span>",
+        "heading_line_1": "Clean",
+        "heading_line_2": "That",
+        "heading_line_3": "Lasts",
         "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
         "cta_primary_text": "Shop now",
         "cta_primary_url": "",
