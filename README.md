@@ -6,8 +6,8 @@ A production-ready Shopify OS 2.0 theme implementation converting the static Pur
 
 ## Live Development Store
 
-- **Store URL**: [ADD DEV STORE URL]
-- **Password**: [ADD STORE PASSWORD]
+- **Store URL**: https://purelane-troopod-ss7aluxx.myshopify.com/
+- **Password**: `purelane2026`
 
 ---
 
