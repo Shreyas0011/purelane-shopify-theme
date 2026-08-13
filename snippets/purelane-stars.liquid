@@ -1,0 +1,21 @@
+{% comment %}
+  snippets/purelane-stars.liquid
+  Renders accessible star rating visualization.
+  Accepts:
+    - rating: decimal/number (default: 4.8)
+    - review_count: integer (optional)
+    - show_count: boolean (default: true)
+{% endcomment %}
+
+{%- assign rating_val = rating -%}
+{%- assign review_count_val = review_count -%}
+{%- assign show_count_val = show_count | default: true -%}
+
+{%- if rating_val != blank -%}
+  <div class="purelane-stars-wrapper" aria-label="Rating: {{ rating_val }} out of 5 stars">
+    <span class="visually-hidden">
+      Rated {{ rating_val }} out of 5 stars{% if review_count_val != blank %} based on {{ review_count_val }} reviews{% endif %}
+    </span>
+    <span aria-hidden="true"><b>★ {{ rating_val }}</b>{% if show_count_val and review_count_val != blank %} · {{ review_count_val }} reviews{% endif %}</span>
+  </div>
+{%- endif -%}

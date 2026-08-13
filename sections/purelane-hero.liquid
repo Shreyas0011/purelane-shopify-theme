@@ -1,0 +1,277 @@
+{% comment %}
+  sections/purelane-hero.liquid
+  Purelane Hero section matching the visual source of truth from purelane-homepage.html.
+{% endcomment %}
+
+<section
+  class="hero purelane-wrapper"
+  data-scene="1"
+  data-purelane-section-type="purelane-hero"
+  id="PurelaneHero-{{ section.id }}"
+>
+  <div class="hero-grid">
+    {%- assign badge_blocks = section.blocks | where: 'type', 'badge' -%}
+    {%- if badge_blocks.size > 0 -%}
+      <!-- Desktop Badges Rail -->
+      <div class="badges glass-2" aria-label="Product promises">
+        {%- for block in badge_blocks limit: 3 -%}
+          <div class="badge" {{ block.shopify_attributes }}>
+            <span class="bi">
+              {% render 'purelane-icons', icon: block.settings.icon %}
+            </span>
+            <span>{{ block.settings.title }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="hero-copy">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="d1 rv in">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      <div class="rule rv rv-d1">
+        <i></i>
+        {% render 'purelane-icons', icon: 'leaf' %}
+        <i></i>
+      </div>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="lede rv rv-d2">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      <div class="hero-cta rv rv-d3">
+        {%- if section.settings.cta_primary_text != blank -%}
+          <a class="btn btn-primary" href="{{ section.settings.cta_primary_url | default: '#shop' }}">
+            {{ section.settings.cta_primary_text | escape }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.cta_secondary_text != blank -%}
+          <a class="btn btn-ghost" href="{{ section.settings.cta_secondary_url | default: '#how' }}">
+            {{ section.settings.cta_secondary_text | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if badge_blocks.size > 0 -%}
+        <!-- Mobile Badge Strip -->
+        <div class="badgestrip rv rv-d4">
+          {%- for block in badge_blocks limit: 3 -%}
+            <div class="glass-2">
+              {% render 'purelane-icons', icon: block.settings.icon %}
+              {{ block.settings.title }}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- assign slide_blocks = section.blocks | where: 'type', 'slide' -%}
+    <div class="hero-prod" id="heroProd-{{ section.id }}">
+      <div class="hstage" id="hstage-{{ section.id }}" data-purelane-hstage>
+        {%- if slide_blocks.size > 0 -%}
+          {%- for block in slide_blocks limit: 3 -%}
+            {%- assign slide_product = block.settings.product -%}
+            {%- assign slide_variant = slide_product.selected_or_first_available_variant -%}
+            {%- assign slide_label = block.settings.label | default: slide_product.title | default: 'Single bottle' -%}
+
+            <div
+              class="hslide hs1 {% if forloop.first %}on{% endif %}"
+              data-hero-slide
+              data-n="{{ forloop.index }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="hp a d1" role="img" aria-label="{{ slide_product.title | default: slide_label | escape }}">
+                {%- if slide_product != blank and slide_product.featured_image != blank -%}
+                  {% render 'purelane-product-image',
+                    image: slide_product.featured_image,
+                    alt: slide_product.title,
+                    loading: 'eager',
+                    class: 'pimg'
+                  %}
+                {%- else -%}
+                  {% render 'purelane-product-image', image: nil, alt: slide_label, loading: 'eager' %}
+                {%- endif -%}
+              </span>
+
+              <div class="glass-2 ptag">
+                <span class="lbl">{{ slide_label | escape }}</span>
+                <span class="val">
+                  {%- if slide_product != blank and slide_variant != blank -%}
+                    <strong>{{ slide_variant.price | money_without_trailing_zeros }}</strong>
+                    {%- if slide_variant.compare_at_price > slide_variant.price -%}
+                      <s>{{ slide_variant.compare_at_price | money_without_trailing_zeros }}</s>
+                    {%- endif -%}
+                  {%- else -%}
+                    <strong>&#8377;200</strong>
+                    <s>&#8377;299</s>
+                  {%- endif -%}
+                </span>
+
+                {%- if block.settings.discount_tag != blank -%}
+                  <span class="cut">{{ block.settings.discount_tag | escape }}</span>
+                {%- elsif slide_variant != blank and slide_variant.compare_at_price > slide_variant.price -%}
+                  {%- assign discount_percent = slide_variant.compare_at_price | minus: slide_variant.price | times: 100.0 | divided_by: slide_variant.compare_at_price | round -%}
+                  <span class="cut">{{ discount_percent }}% off</span>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Fallback slide if no blocks configured -->
+          <div class="hslide hs1 on" data-hero-slide data-n="1">
+            <span class="hp a d1" role="img" aria-label="Purelane foaming kitchen cleaner">
+              {% render 'purelane-product-image', image: nil, alt: 'Purelane cleaner', loading: 'eager' %}
+            </span>
+            <div class="glass-2 ptag">
+              <span class="lbl">Single bottle</span>
+              <span class="val"><strong>&#8377;200</strong><s>&#8377;299</s></span>
+              <span class="cut">33% off</span>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if slide_blocks.size > 1 -%}
+        <div class="hdots" id="hdots-{{ section.id }}">
+          {%- for block in slide_blocks limit: 3 -%}
+            <button
+              type="button"
+              class="{% if forloop.first %}on{% endif %}"
+              data-hero-dot
+              aria-label="Show slide {{ forloop.index }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Hero",
+  "tag": "section",
+  "class": "purelane-hero-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Clean<br>That<br><span class=\"lime\">Lasts</span>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary CTA text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary CTA text",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Value Badge",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf (Plant powered)" },
+            { "value": "shield", "label": "Shield (Safe for kids/pets)" },
+            { "value": "sparkle", "label": "Sparkle (Zero harsh chemicals)" },
+            { "value": "box", "label": "Box" },
+            { "value": "truck", "label": "Truck" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Plant powered"
+        }
+      ]
+    },
+    {
+      "type": "slide",
+      "name": "Product Slide",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stage Label",
+          "default": "Single bottle"
+        },
+        {
+          "type": "text",
+          "id": "discount_tag",
+          "label": "Discount Tag Override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Hero",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": { "icon": "leaf", "title": "Plant powered" }
+        },
+        {
+          "type": "badge",
+          "settings": { "icon": "shield", "title": "Safe for kids & pets" }
+        },
+        {
+          "type": "badge",
+          "settings": { "icon": "sparkle", "title": "Zero harsh chem" }
+        },
+        {
+          "type": "slide",
+          "settings": { "label": "Single bottle", "discount_tag": "33% off" }
+        },
+        {
+          "type": "slide",
+          "settings": { "label": "Any 2 products", "discount_tag": "Save ₹249" }
+        },
+        {
+          "type": "slide",
+          "settings": { "label": "Any 3 products", "discount_tag": "Save ₹398" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{% comment %}
+  snippets/purelane-product-card.liquid
+  Reusable product card component adhering to Shopify Dawn theme architecture.
+  Accepts:
+    - product: Shopify product object (required)
+    - badge_override: optional custom badge text
+    - loading: 'lazy' or 'eager' for product image (default: 'lazy')
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign card_badge = badge_override | default: product.metafields.custom.badge -%}
+{%- assign card_rating = product.metafields.custom.rating -%}
+{%- assign card_reviews = product.metafields.custom.review_count -%}
+
+{%- if card_badge == blank and current_variant != blank -%}
+  {%- if current_variant.compare_at_price > current_variant.price -%}
+    {%- assign card_badge = "Sale" -%}
+  {%- endif -%}
+{%- endif -%}
+
+<article class="glass card purelane-card rv" data-product-id="{{ product.id }}">
+  <div class="shot purelane-card-shot">
+    {%- if product.available == false -%}
+      <span class="pill purelane-card-pill sold-out">Sold out</span>
+    {%- elsif card_badge != blank -%}
+      <span class="pill purelane-card-pill">{{ card_badge | escape }}</span>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+      {% render 'purelane-product-image',
+        image: product.featured_image,
+        alt: product.title,
+        loading: loading,
+        class: 'pimg'
+      %}
+    </a>
+  </div>
+
+  <div class="purelane-card-body">
+    <h3 class="purelane-card-title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+
+    {%- if card_rating != blank -%}
+      <div class="rate purelane-card-rate">
+        {% render 'purelane-stars',
+          rating: card_rating,
+          review_count: card_reviews,
+          show_count: true
+        %}
+      </div>
+    {%- endif -%}
+
+    <div class="purelane-card-footer">
+      <div class="pr purelane-card-pr">
+        <strong>{{ current_variant.price | money_without_trailing_zeros }}</strong>
+
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <s>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>
+          {%- assign savings_percent = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+          <em>{{ savings_percent }}% off</em>
+        {%- endif -%}
+      </div>
+
+      {%- if product.available and current_variant != blank -%}
+        <form method="post" action="{{ routes.cart_add_url | default: '/cart/add' }}" class="purelane-card-form">
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+          <button type="submit" class="btn btn-ghost btn-sm purelane-card-btn">
+            Add to cart
+          </button>
+        </form>
+      {%- else -%}
+        <button type="button" class="btn btn-ghost btn-sm purelane-card-btn" disabled="disabled">
+          Sold out
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

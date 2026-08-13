@@ -1,0 +1,241 @@
+{% comment %}
+  sections/purelane-reviews.liquid
+  Customer Reviews section with continuous CSS marquee loop matching prototype #reviews.
+{% endcomment %}
+
+<section
+  class="sec revband purelane-wrapper"
+  id="reviews-{{ section.id }}"
+  data-scene="1"
+  data-purelane-section-type="purelane-reviews"
+>
+  <div class="wrap">
+    <div class="revhead rv">
+      {%- if section.settings.kicker != blank -%}
+        <span class="kicker">{{ section.settings.kicker | escape }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.rating_score != blank or section.settings.rating_count_text != blank -%}
+        <span class="agg">
+          {% render 'purelane-stars', rating: section.settings.rating_score, show_count: false %}
+          {%- if section.settings.rating_score != blank -%}
+            <b>{{ section.settings.rating_score | escape }}</b>
+          {%- endif -%}
+          {%- if section.settings.rating_count_text != blank -%}
+            from {{ section.settings.rating_count_text | escape }}
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.home_count_text != blank -%}
+        <span class="agg">
+          Loved by <b>{{ section.settings.home_count_text | escape }}</b>
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- assign review_blocks = section.blocks | where: 'type', 'review_card' -%}
+  <div class="revrail rv" aria-label="Customer reviews">
+    <div class="revtrack">
+      {%- if review_blocks.size > 0 -%}
+        {% comment %} First Pass: Primary accessible review cards {% endcomment %}
+        {%- for block in review_blocks limit: 12 -%}
+          <article class="glass-2 rcard" {{ block.shopify_attributes }}>
+            <div class="st">
+              {% render 'purelane-stars', rating: block.settings.rating, show_count: false %}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h5>{{ block.settings.title | escape }}</h5>
+            {%- endif -%}
+
+            {%- if block.settings.quote != blank -%}
+              <blockquote>{{ block.settings.quote | escape }}</blockquote>
+            {%- endif -%}
+
+            {%- if block.settings.author_name != blank or block.settings.product_label != blank -%}
+              <footer>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
+                {%- if block.settings.author_name != blank -%}
+                  <b>{{ block.settings.author_name | escape }}</b>
+                {%- endif -%}
+                {%- if block.settings.product_label != blank -%}
+                  <span>&middot; {{ block.settings.product_label | escape }}</span>
+                {%- endif -%}
+              </footer>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+
+        {% comment %} Second Pass: Visual duplicates for seamless infinite marquee loop (hidden from assistive tech) {% endcomment %}
+        {%- for block in review_blocks limit: 12 -%}
+          <article class="glass-2 rcard" aria-hidden="true" tabindex="-1">
+            <div class="st">
+              {% render 'purelane-stars', rating: block.settings.rating, show_count: false %}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h5>{{ block.settings.title | escape }}</h5>
+            {%- endif -%}
+
+            {%- if block.settings.quote != blank -%}
+              <blockquote>{{ block.settings.quote | escape }}</blockquote>
+            {%- endif -%}
+
+            {%- if block.settings.author_name != blank or block.settings.product_label != blank -%}
+              <footer>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
+                {%- if block.settings.author_name != blank -%}
+                  <b>{{ block.settings.author_name | escape }}</b>
+                {%- endif -%}
+                {%- if block.settings.product_label != blank -%}
+                  <span>&middot; {{ block.settings.product_label | escape }}</span>
+                {%- endif -%}
+              </footer>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Theme Editor placeholder if no review blocks configured -->
+        <article class="glass-2 rcard">
+          <div class="st">★★★★★</div>
+          <h5>Works like a charm</h5>
+          <blockquote>Finally an eco option that cleans as well as the chemical detergent I used for years.</blockquote>
+          <footer>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>
+            <b>Anita</b><span>&middot; Laundry detergent</span>
+          </footer>
+        </article>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Reviews Marquee",
+  "tag": "section",
+  "class": "purelane-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "That's what they said"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "rating_count_text",
+      "label": "Rating Count Text",
+      "default": "8,000+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "home_count_text",
+      "label": "Home Count Text",
+      "default": "12 lakh+ homes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Works like a charm"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review Quote",
+          "default": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Anita"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Product Label",
+          "default": "Laundry detergent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Reviews Marquee",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Works like a charm",
+            "quote": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author_name": "Anita",
+            "product_label": "Laundry detergent"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Best dishwash ever",
+            "quote": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author_name": "Priya",
+            "product_label": "Dishwash gel"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Great product, great packaging",
+            "quote": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author_name": "Sunita",
+            "product_label": "Liquid handwash"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Dog friendly",
+            "quote": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author_name": "Rohit S.",
+            "product_label": "Floor cleaner"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Sparkling taps again",
+            "quote": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author_name": "Verified buyer",
+            "product_label": "Tap cleaner"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

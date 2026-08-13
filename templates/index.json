@@ -1,0 +1,234 @@
+{
+  "sections": {
+    "hero": {
+      "type": "purelane-hero",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "icon": "leaf",
+            "title": "Plant powered"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "title": "Safe for kids & pets"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Zero harsh chem"
+          }
+        },
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "label": "Single bottle",
+            "discount_tag": "33% off"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "label": "Any 2 products",
+            "discount_tag": "Save ₹249"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "label": "Any 3 products",
+            "discount_tag": "Save ₹398"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
+    },
+    "shop": {
+      "type": "purelane-shop",
+      "settings": {
+        "kicker": "Bestsellers",
+        "heading": "Loved by 30,000 homes",
+        "products_to_show": 4
+      }
+    },
+    "combos": {
+      "type": "purelane-combos",
+      "blocks": {
+        "combo_1": {
+          "type": "combo_card",
+          "settings": {
+            "title": "Kitchen essentials",
+            "badge_flag": "Most popular",
+            "is_hero_combo": false,
+            "override_price": 499,
+            "includes_summary": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen.",
+            "cta_text": "Shop bundle",
+            "cta_url": "#bundles"
+          }
+        },
+        "combo_2": {
+          "type": "combo_card",
+          "settings": {
+            "title": "Laundry care bundle",
+            "badge_flag": "",
+            "is_hero_combo": false,
+            "override_price": 499,
+            "includes_summary": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner. Softer, fresher wash.",
+            "cta_text": "Shop bundle",
+            "cta_url": "#bundles"
+          }
+        },
+        "combo_3": {
+          "type": "combo_card",
+          "settings": {
+            "title": "Complete home bundle",
+            "badge_flag": "Best value",
+            "is_hero_combo": true,
+            "override_price": 799,
+            "includes_summary": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
+            "cta_text": "Shop bundle",
+            "cta_url": "#bundles"
+          }
+        }
+      },
+      "block_order": [
+        "combo_1",
+        "combo_2",
+        "combo_3"
+      ]
+    },
+    "bundles": {
+      "type": "purelane-bundles",
+      "blocks": {
+        "tier_1": {
+          "type": "bundle_tier",
+          "settings": {
+            "tag_text": "Starter",
+            "product_count": 2,
+            "price": 349,
+            "compare_at_price": 598,
+            "unit_price_note": "Flat ₹174 per product",
+            "feature_list": "Pick any two products\nFree shipping across India",
+            "is_featured": false,
+            "cta_text": "Build this box",
+            "cta_url": "#shop"
+          }
+        },
+        "tier_2": {
+          "type": "bundle_tier",
+          "settings": {
+            "tag_text": "Most popular",
+            "product_count": 3,
+            "price": 499,
+            "compare_at_price": 897,
+            "unit_price_note": "Flat ₹166 per product",
+            "feature_list": "Pick any three products\nCovers kitchen and laundry\nFree shipping across India",
+            "is_featured": true,
+            "cta_text": "Build this box",
+            "cta_url": "#shop"
+          }
+        },
+        "tier_3": {
+          "type": "bundle_tier",
+          "settings": {
+            "tag_text": "Whole home",
+            "product_count": 5,
+            "price": 799,
+            "compare_at_price": 1495,
+            "unit_price_note": "Flat ₹160 per product",
+            "feature_list": "Pick any five products\nEvery room in one order\nFree shipping across India",
+            "is_featured": false,
+            "cta_text": "Build this box",
+            "cta_url": "#shop"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ]
+    },
+    "reviews": {
+      "type": "purelane-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "title": "Works like a charm",
+            "quote": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author_name": "Anita",
+            "product_label": "Laundry detergent"
+          }
+        },
+        "review_2": {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "title": "Best dishwash ever",
+            "quote": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author_name": "Priya",
+            "product_label": "Dishwash gel"
+          }
+        },
+        "review_3": {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "title": "Great product, great packaging",
+            "quote": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author_name": "Sunita",
+            "product_label": "Liquid handwash"
+          }
+        },
+        "review_4": {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "title": "Dog friendly",
+            "quote": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author_name": "Rohit S.",
+            "product_label": "Floor cleaner"
+          }
+        },
+        "review_5": {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "title": "Sparkling taps again",
+            "quote": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author_name": "Verified buyer",
+            "product_label": "Tap cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "shop",
+    "combos",
+    "bundles",
+    "reviews"
+  ]
+}
